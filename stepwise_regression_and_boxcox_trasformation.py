@@ -93,3 +93,19 @@ def box_cox(datacol,lam_min,lam_max,grain):
     y = special.boxcox1p(datacol, lam_best)
     #return the transformed y and the best lamda
     return y,lam_best
+
+#test the consistency between two dataset, length can be different.
+def homotest(y1,y2,grain):
+    lower = max(y1.min(),y2.min())
+    upper = min(y1.max(),y2.max())
+    coef_ = y1.count()/y2.count()
+    chi2 = 0
+    df = 0
+    block = np.linspace(lower,upper,grain)
+    for i in range(len(block)-1):
+        f0 = y1[(y1>block[i])&(y1<block[i+1])].count()
+        fe = y2[(y2>block[i])&(y2<block[i+1])].count()*coef_
+        chi2 += (f0-fe)**2/(fe+1)
+        df += 1
+    p = 1-stats.chi2.cdf(chi2,df-1)
+    return p 
