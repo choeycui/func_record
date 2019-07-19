@@ -109,3 +109,20 @@ def homotest(y1,y2,grain):
         df += 1
     p = 1-stats.chi2.cdf(chi2,df-1)
     return p 
+
+#return the updated dataframe and dummy names via the input of a dataframe and the categorical columns
+def dummy(df,cols):
+    #categorical variable transformation
+    dummied_features = []
+    for i in range(0,len(cols)):
+        dummied_features.append(\
+                pd.get_dummies(df[cols[i]],\
+                prefix = cols[i],\
+                drop_first=False))
+        #add dummy variables into dataframe
+        df = df.join(dummied_features[i])
+    feature_cols = []
+    for j in range(0,len(dummied_features)):
+        for col in dummied_features[j].columns:
+            feature_cols.append(col)
+    return df,feature_cols
