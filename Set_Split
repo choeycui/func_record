@@ -7,7 +7,8 @@ This File is used to go through all the splited set of a set by applying DFS alg
 @author: choeycui
 """
 
-Set2beSplited = ['PRD','E1','BOG','CD','E2','S2','W1']
+
+Set2beSplited = [1,2,3,4] # This is the set to be splited
 Groups = [0]*len(Set2beSplited)
 
 def append_set(Splited_All, print_ = False):
