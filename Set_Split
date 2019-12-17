@@ -36,3 +36,197 @@ def DFS(init_index):
             Groups[index] = cur_group
 
 DFS(0)
+
+
+
+'''
+
+eg.
+
+setlist=[1,2,3,4]
+code=[1,1,1,1]
+n=4
+
+def print_set():
+    MAX = -1
+    print('{',end='')
+    for i in range(0,n):
+        if code[i]==1:
+            print(setlist[i],end='')
+        if MAX < code[i]:
+            MAX = code[i]
+    print('},{',end='')
+    for i in range(2,MAX+1):
+        for j in range(0,n):
+            if code[j]==i:
+                print(setlist[j],end='')
+        print('},{',end='')
+    print('}\n',end='')
+
+
+def max_pre(i):
+    MAX = -1
+    for index in range(0,i):
+        if code[index]>MAX:
+            MAX = code[index]
+    return MAX+1
+
+def DFS(index):
+    print_set()
+    if index==n:
+        return
+    for i in range(index,n):
+        
+        temp = code[i]+1
+        for j in range(temp,min([i+1,max_pre(i)])+1):
+            save = code[i]
+            code[i]=j
+            DFS(i+1)
+            code[i]=save
+
+DFS(1)
+
+----------------------the procedure----------------------
+code = [1,1,1,1]
+DFS(1)
+	index=1
+	i in [1,2,3]
+	i=1
+	temp=code[1]+1=2
+		i+1=2, max_pre(1)=2
+		j in [2]
+		j=2
+			save=code[1]=1
+			code[1]=j=2
+# code = [1,2,1,1]
+			DFS(2)
+				index=2
+				i in [2,3]
+				i=2
+				temp=code[2]+1=2
+					i+1=3, max_pre(2)=3
+					j in [2,3]
+					j=2
+						save=code[2]=1
+						code[2]=j=2
+# code = [1,2,2,1]
+						DFS(3)
+							index=3
+							i in [3]
+							i=3
+							temp=code[3]+1=2
+								i+1=4,max_pre(3)=3
+								j in [2,3]
+								j=2
+								save=code[3]=1
+								code[3]=j=2
+# code = [1,2,2,2]
+								DFS(4) # return
+								code[3]=save=1
+# code = [1,2,2,1]
+								j=3
+								save=code[3]=1
+								code[3]=j=3
+# code = [1,2,2,3]
+								DFS(4) # return
+								code[3]=save=1
+# code = [1,2,2,1]
+						code[2]=save=1
+# code = [1,2,1,1]
+					j=3
+						save=code[2]=1
+						code[2]=j=3
+# code = [1,2,3,1]
+						DFS(3)
+							index=3
+							i in [3]
+							i=3
+							temp=code[3]+1=2
+								i+1=4,max_pre(3)=4
+								j in [2,3,4]
+								j=2
+								save=code[3]=1
+								code[3]=j=2
+# code = [1,2,3,2]
+								DFS(4) # return
+								code[3]=save=1
+# code = [1,2,3,1]
+								j=3
+								save=code[3]=1
+								code[3]=j=3
+# code = [1,2,3,3]
+								DFS(4) # return
+								code[3]=save=1
+# code = [1,2,3,1]
+								j=4
+								save=code[3]=1
+								code[3]=j=4
+# code = [1,2,3,4]
+								DFS(4) # return
+								code[3]=save=1
+# code = [1,2,3,1]
+						code[2]=save=1
+# code = [1,2,1,1]
+				i=3
+				temp=code[3]+1=2
+					i+1=4,max_pre(3)=3
+					j in [2,3]
+					j=2
+						save=code[3]=1
+						code[3]=j=2
+# code = [1,2,1,2]
+						DFS(4) # return
+						code[3]=save=1
+# code = [1,2,1,1]
+					j=3
+						save=code[3]=1
+						code[3]=3
+# code = [1,2,1,3]
+						DFS(4) # return
+						code[3]=save=1
+# code = [1,2,1,1]
+			code[1]=save=1
+# code = [1,1,1,1]
+	i=2
+	temp=code[2]+1=2
+		i+1=3,max_pre(2)=2
+		j in [2]
+		j=2
+			save=code[2]=1
+			code[2]=j=2
+# code = [1,1,2,1]
+			DFS(3)
+				index=3
+				i in [3]
+				i=3
+				temp=code[3]+1=2
+					i+1=4,max_pre(3)=3
+					j in [2,3]
+					j=2
+						save=code[3]=1
+						code[3]=j=2
+# code = [1,1,2,2]
+						DFS(4) # return
+						code[3]=save=1
+# code = [1,1,2,1]
+					j=3
+						save=code[3]=1
+						code[3]=j=3
+# code = [1,1,2,3]
+						DFS(4) # return
+						code[3]=save=1
+# code = [1,1,2,1]
+			code[2]=save=1
+# code = [1,1,1,1]
+	i=3
+	temp=code[3]+1=2
+		i+1=4,max_pre(3)=2
+		j in [2]
+		j=2
+			save=code[3]=1
+			code[3]=j=2
+# code = [1,1,1,2]
+			DFS(4) # return
+			code[3]=save=1
+# code = [1,1,1,1]
+'''
