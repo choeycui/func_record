@@ -41,7 +41,9 @@ DFS(0)
 
 '''
 
-eg.
+-------------------------------eg.-------------------------------
+
+# This is the prototype code, run the same things as above.
 
 setlist=[1,2,3,4]
 code=[1,1,1,1]
