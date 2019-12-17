@@ -9,7 +9,7 @@ This code is used to go through all the ways split a list by applying the baffle
 
 list2besplited = [1,2,3,4]
 
-# this function is used to get all the subset of a set
+# this function is used to get all the subsets of a set
 def PowerSetsBinary(items):
     N = len(items)
     set_all = []
