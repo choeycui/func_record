@@ -1,0 +1,37 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Dec 16 17:58:07 2019
+
+This File is used to go through all the splited set of a set by applying DFS algorithm.
+
+@author: choeycui
+"""
+
+Set2beSplited = ['PRD','E1','BOG','CD','E2','S2','W1']
+Groups = [0]*len(Set2beSplited)
+
+def append_set(Splited_All, print_ = False):
+    Set_Splited = []
+    for group in range(min(Groups), max(Groups)+1):
+        Set1Group=[]
+        for index in range(0, len(Set2beSplited)):
+            if Groups[index] == group:
+                Set1Group.append(Set2beSplited[index])
+        Set_Splited.append(Set1Group)
+    if print_ == True:
+        print(Set_Splited)
+    Splited_All.append(Set_Splited)
+
+all_ = []
+def DFS(init_index):
+    append_set(all_, print_ = True)
+    for index in range(init_index, len(Set2beSplited)-1):
+        next_gourp = Groups[index] + 1
+        group_max = min([index + 1, max(list(Groups[:index+1]))+1])
+        for group in range(next_gourp,  group_max + 1):
+            cur_group = Groups[index]
+            Groups[index] = group
+            DFS(index + 1)
+            Groups[index] = cur_group
+
+DFS(0)
