@@ -2,7 +2,7 @@
 """
 Created on Tue Jan 14 15:16:27 2020
 
-@author: cuch9001
+@author: choeycui
 """
 
 import requests
