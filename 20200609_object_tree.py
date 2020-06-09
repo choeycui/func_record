@@ -3,6 +3,7 @@
 Created on Tue Jun  9 17:10:55 2020
 
 This File is to create a tree via a file of the relationship between the parent object and child object
+(Please mark the root name with value == 1 in column 'ROOT')
 
 @author: choeycui
 """
@@ -31,7 +32,7 @@ class ObjName:
         self.parent = parent
 
 name_ref = pd.read_excel('YOUR FILE PATH',sheet_name = 'YOUR SHEET NAME')        
-name_root = list(name_ref[name_ref['LEVEL']==1]['MBDCODE'])
+name_root = list(name_ref[name_ref['ROOT']==1]['CHILD'])
 paths = [[i] for i in name_root]
 name2obj = {}
 nametree = tree()
