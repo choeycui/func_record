@@ -43,5 +43,5 @@ def pnt_count(df_points, df_polygons, bound_cnt = False, poly_id='block_id'):
     pivot = pd.pivot_table(pnt_poly,values=[df_points.columns[0]],index=[poly_id],aggfunc='count',dropna=False).reset_index()
     polygon_new = pd.merge(df_polygons,pivot,how='left',left_on=[poly_id],right_on=[poly_id])
     polygon_new.rename(columns={df_points.columns[0]:'NUMPOINTS'},inplace=True)
-    polygon_new['NUMPOINTS'].fillna(0,inplace=True)
+    polygon_new.fillna(value={'NUMPOINTS':0},inplace=True)
     return polygon_new
